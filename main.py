@@ -18,9 +18,12 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 		message = json.loads(json_message)
 
 		if message[0].strip() is 'add':
-			key = message[1].strip()
-			value = message[2].strip()
-			db[key] = value
+			try:
+				key = message[1].strip()
+				value = message[2].strip()
+				db[key] = value
+			except Exception,e:
+				self.write_message(str(e))
 
 		elif message[0].strip() is 'show':
 			dict_str = json.dumps(db)
@@ -30,7 +33,7 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 			self.write_message('wrong format!')
 
 	def on_close(self):
-		self.send_message('goodbye...')
+		self.write_message('goodbye...')
 
 app = tornado.web.Application([
 	(r'/',WsHandler),
