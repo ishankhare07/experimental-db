@@ -9,7 +9,7 @@ import os
 
 db = anydbm.open('test_db','n')
 
-class WsHandler(tornado.WebSocket.WebSocketHandler):
+class WsHandler(tornado.websocket.WebSocketHandler):
 
 	def open(self):
 		self.write_message('Welcome\n')
