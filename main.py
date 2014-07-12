@@ -7,7 +7,7 @@ import anydbm
 import json
 import os
 
-db = anydbm.open('test_db','n')
+db = anydbm.open('test_db','c')
 
 class WsHandler(tornado.websocket.WebSocketHandler):
 
@@ -28,7 +28,8 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 		elif message[0].strip() == 'show':
 			try:
 				if len(db):
-					dict_str = json.dumps(db)
+					normal_db = dict(zip(db.keys(),db.values()))
+					dict_str = json.dumps(normal_db)
 					self.write_message(dict_str)
 				else:
 					self.write_message('empty db')
