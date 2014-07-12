@@ -18,10 +18,10 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 		message = json.loads(json_message)
 		self.write_message(str(message))
 
-		'''if message[0].strip() == 'add':
+		if message[0].strip() == 'add':
 			try:
-				key = message[1].strip()
-				value = message[2].strip()
+				key = message[1]
+				value = message[2]
 				db[key] = value
 			except Exception,e:
 				self.write_message(str(e))
