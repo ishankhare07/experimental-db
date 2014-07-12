@@ -20,7 +20,7 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 
 		if message[0].strip() == 'add':
 			try:
-				db[message[1]] = message[2]
+				db[str(message[1])] = str(message[2])
 				self.write_message('success')
 			except Exception,e:
 				self.write_message('error is here ' + str(e))
