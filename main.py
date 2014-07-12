@@ -16,7 +16,7 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 
 	def on_message(self,json_message):
 		message = json.loads(json_message)
-		self.write_message(str(message))
+		#self.write_message(str(message))
 
 		if message[0].strip() == 'add':
 			try:
