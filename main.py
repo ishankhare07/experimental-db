@@ -23,12 +23,16 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 				key = message[1]
 				value = message[2]
 				db[key] = value
+				self.write_message('success')
 			except Exception,e:
 				self.write_message(str(e))
 
 		elif message[0].strip() == 'show':
-			dict_str = json.dumps(db)
-			self.write_message(dict_str)
+			try:
+				dict_str = json.dumps(db)
+				self.write_message(dict_str)
+			except Exception,e:
+				self.write_message(str(e))
 
 		else:
 			self.write_message('wrong format!')
