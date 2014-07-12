@@ -31,7 +31,7 @@ class WsHandler(tornado.websocket.WebSocketHandler):
 			self.write_message(dict_str)
 
 		else:
-			self.write_message('wrong format!')'''
+			self.write_message('wrong format!')
 
 	def on_close(self):
 		self.write_message('goodbye...')
