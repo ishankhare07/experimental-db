@@ -1,5 +1,5 @@
 from pymongo import *
-import datetime,random
+import datetime,random,os
 
 mongo_url = 'mongodb://ishan:websockets@oceanic.mongohq.com:10046/ishan'
 
@@ -9,12 +9,14 @@ collection = db.notes
 print 'Connected to database server...'
 
 def show_note():
+	os.system('clear')
 	for x in collection.find():
 		print '\nTitle : ' + x["note"]
 		print 'Content : ' + x["content"]
 		print x["datetime"] + '\n'
 
 def save_note():
+	os.system('clear')
 	title = raw_input('Enter a note title : ')
 	data = raw_input('Enter the note : ')
 	note = {
@@ -29,13 +31,13 @@ def save_note():
 		print 'Error....try again...'
 
 def delete_note():
+	os.system('clear')
 	for x in collection.find():
 		print '\nid : ' + str(x["_id"])
 		print 'title : ' + x["note"] + '\n'
 	tbd = int(raw_input('Enter the id of note to be deleted : '))
 	try:
-		response = collection.remove({"_id" : tbd})
-		print response
+		collection.remove({"_id" : tbd})
 	except:
 		print 'Sorry....try again...'
 
