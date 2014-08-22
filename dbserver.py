@@ -32,9 +32,10 @@ def delete_note():
 	for x in collection.find():
 		print '\nid : ' + str(x["_id"])
 		print 'title : ' + x["note"] + '\n'
-	tbd = raw_input('Enter the id of note to be deleted : ')
+	tbd = int(raw_input('Enter the id of note to be deleted : '))
 	try:
-		collection.remove({"_id" : tbd})
+		response = collection.remove({"_id" : tbd})
+		print response
 	except:
 		print 'Sorry....try again...'
 
